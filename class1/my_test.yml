@@ -1,0 +1,9 @@
+- !!python/unicode 'some string'
+- 99
+- 18
+- !!python/unicode 'ip_addr': !!python/unicode '172.31.200.1'
+  !!python/unicode 'model': !!python/unicode '1921'
+  !!python/unicode 'platform': !!python/unicode 'cisco_ios'
+  !!python/unicode 'vendor': !!python/unicode 'cisco'
+- !!python/unicode 'another string'
+- !!python/unicode 'final string'

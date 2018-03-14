@@ -1,0 +1,52 @@
+# Create a 'test' branch in your repository.
+# a. Switch between the 'master' branch and the 'test' branch.
+# b. Add a file to the 'test' branch.
+# c. Switch back to the 'master' branch.
+# d. Merge this 'test' branch into your 'master' branch.
+
+### 5
+$ git branch
+* master
+
+$ git branch test
+$ git branch
+* master
+  test
+
+
+### 5a
+$ git checkout test
+Switched to branch 'test'
+
+$ git branch
+  master
+* test
+
+
+### 5b
+$ vi test_zip.py
+$ chmod 755 test_zip.py 
+
+$ git add test_zip.py 
+$ git commit -m "Adding test_zip.py file"
+[test c6ebab9] Adding test_zip.py file
+ 1 file changed, 7 insertions(+)
+ create mode 100755 test_zip.py
+
+
+### 5c
+$ git checkout master
+Switched to branch 'master'
+
+$ git branch
+* master
+  test
+
+
+### 5d
+$ git merge test
+Updating 4efcbaa..c6ebab9
+Fast-forward
+ test_zip.py | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100755 test_zip.py
