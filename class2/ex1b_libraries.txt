@@ -1,0 +1,15 @@
+
+$ python
+Python 3.6.2 (default, Feb 19 2018, 21:55:54) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import pysnmp
+>>> import paramiko
+
+>>> pysnmp.__version__
+'4.4.4'
+
+>>> paramiko.__version__
+'2.4.0'
+
