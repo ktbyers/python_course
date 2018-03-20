@@ -1,7 +1,10 @@
 #!/usr/bin/env python
-'''
+"""
 Convert the code from exercise2 to a class-based solution
-'''
+
+This program is meaningfully more complicated in PY3, than PY2. Also it
+is more complicated if you need both PY2 and PY3 compatibility.
+"""
 from __future__ import print_function, unicode_literals
 
 import telnetlib
