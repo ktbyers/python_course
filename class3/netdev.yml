@@ -1,8 +1,0 @@
-pynet-rtr1.twb-tech.com: !!python/object/new:__main__.NetworkDevice
-- 1209907388
-- 1209512652
-- false
-pynet-rtr2.twb-tech.com: !!python/object/new:__main__.NetworkDevice
-- 1080356334
-- 1080332501
-- false
