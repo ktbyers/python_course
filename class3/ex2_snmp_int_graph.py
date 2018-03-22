@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-'''
+"""
 Using SNMPv3 create two SVG image files.
 
 The first image file should graph the input and output octets on interface FA4
@@ -17,7 +17,8 @@ The relevant OIDs are as follows:
 ('ifInUcastPkts_fa4', '1.3.6.1.2.1.2.2.1.11.5')
 ('ifOutOctets_fa4', '1.3.6.1.2.1.2.2.1.16.5'),
 ('ifOutUcastPkts_fa4', '1.3.6.1.2.1.2.2.1.17.5')
-'''
+"""
+from __future__ import print_function, unicode_literals
 
 from snmp_helper import snmp_get_oid_v3, snmp_extract
 import line_graph
@@ -26,11 +27,11 @@ from getpass import getpass
 
 
 def get_interface_stats(snmp_device, snmp_user, stat_type, row_number):
-    '''
+    """
     stat_type can be 'in_octets, out_octets, in_ucast_pkts, out_ucast_pkts
 
     returns the counter value as an integer
-    '''
+    """
 
     oid_dict = {
         'in_octets':    '1.3.6.1.2.1.2.2.1.10',
@@ -39,7 +40,7 @@ def get_interface_stats(snmp_device, snmp_user, stat_type, row_number):
         'out_ucast_pkts':    '1.3.6.1.2.1.2.2.1.17',
     }
 
-    if not stat_type in oid_dict.keys():
+    if stat_type not in oid_dict.keys():
         raise ValueError("Invalid value for stat_type: {}" % stat_type)
 
     # Make sure row_number can be converted to an int
@@ -53,18 +54,40 @@ def get_interface_stats(snmp_device, snmp_user, stat_type, row_number):
     return int(snmp_extract(snmp_data))
 
 
+def create_graph(graph_stats, sample_duration):
+    """Generate the graph files."""
+
+    print()
+    x_labels = []
+    for x_label in range(1, 13):
+        x_labels.append(str(x_label * sample_duration))
+
+    # Create the graphs
+    if line_graph.twoline("pynet-rtr1-octets.svg", "pynet-rtr1 Fa4 Input/Output Bytes",
+                          graph_stats["in_octets"], "In Octets", graph_stats["out_octets"],
+                          "Out Octets", x_labels):
+        print("In/Out Octets graph created")
+
+    if line_graph.twoline("pynet-rtr1-pkts.svg", "pynet-rtr1 Fa4 Input/Output Unicast Packets",
+                          graph_stats["in_ucast_pkts"], "In Packets", graph_stats["out_ucast_pkts"],
+                          "Out Packets", x_labels):
+        print("In/Out Packets graph created")
+    print()
+
+
 def main():
-    '''
+    """
     Connect to router via SNMPv3.
 
     Create two graphs in/out octets and in/out packets
-    '''
-    debug = False
-
-    # SNMPv3 Connection Parameters
-    rtr1_ip_addr = raw_input("Enter pynet-rtr1 IP: ")
+    """
+    try:
+        rtr1_ip_addr = raw_input("Enter pynet-rtr1 IP: ")
+    except NameError:
+        rtr1_ip_addr = input("Enter pynet-rtr1 IP: ")
     my_key = getpass(prompt="Auth + Encryption Key: ")
 
+    # SNMPv3 Connection Parameters
     a_user = 'pysnmp'
     auth_key = my_key
     encrypt_key = my_key
@@ -83,43 +106,30 @@ def main():
     base_count_dict = {}
 
     # Enter a loop gathering SNMP data every 5 minutes for an hour.
-    for time_track in range(0, 65, 5):
-        print "\n%20s %-60s" % ("time", time_track)
+    # 13 samples, one every 5 minutes
+    SLEEP_TIME = 10
+    for count in range(12):
+        print()
+        time_track = count * SLEEP_TIME
+        print("{:>20} {:<60}".format("time", time_track))
 
-        # Gather SNMP statistics for these four fields
-        for entry in ("in_octets", "out_octets", "in_ucast_pkts", "out_ucast_pkts"):
-            # Retrieve the SNMP data
+        # Gather SNMP statistics for each of octet/packets in and out
+        for entry in graph_stats.keys():
             snmp_retrieved_count = get_interface_stats(snmp_device, snmp_user, entry, row_number)
-            # Get the base counter value
+            # Base counter is a dictionary with the last sample value
             base_count = base_count_dict.get(entry)
             if base_count:
+                # Calculate the difference from the last sample
+                calculated_diff = snmp_retrieved_count - base_count
                 # Save the data to graph_stats dictionary
-                graph_stats[entry].append(snmp_retrieved_count - base_count)
-                print "%20s %-60s" % (entry, graph_stats[entry][-1])
+                graph_stats[entry].append(calculated_diff)
+                print("{:>20} {:<60}".format(entry, calculated_diff))
             # Update the base counter value
             base_count_dict[entry] = snmp_retrieved_count
-        time.sleep(10)
-
-    print
-    if debug:
-        print graph_stats
-    x_labels = []
-    for x_label in range(5, 65, 5):
-        x_labels.append(str(x_label))
-    if debug:
-        print x_labels
+        time.sleep(SLEEP_TIME)
 
     # Create the graphs
-    if line_graph.twoline("pynet-rtr1-octets.svg", "pynet-rtr1 Fa4 Input/Output Bytes",
-                          graph_stats["in_octets"], "In Octets", graph_stats["out_octets"],
-                          "Out Octets", x_labels):
-        print "In/Out Octets graph created"
-
-    if line_graph.twoline("pynet-rtr1-pkts.svg", "pynet-rtr1 Fa4 Input/Output Unicast Packets",
-                          graph_stats["in_ucast_pkts"], "In Packets", graph_stats["out_ucast_pkts"],
-                          "Out Packets", x_labels):
-        print "In/Out Packets graph created"
-    print
+    create_graph(graph_stats, sample_duraction=SLEEP_TIME)
 
 
 if __name__ == '__main__':
