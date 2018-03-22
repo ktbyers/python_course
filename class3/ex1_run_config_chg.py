@@ -103,8 +103,8 @@ def send_notification(device_name):
 
     current_time = datetime.now()
 
-    sender = 'twb@twb-tech.com'
-    recipient = 'ktbyers@twb-tech.com'
+    sender = 'sender@twb-tech.com'
+    recipient = 'recipient@twb-tech.com'
     subject = 'Device {} was modified'.format(device_name)
     message = '''
 The running configuration of {} was modified.

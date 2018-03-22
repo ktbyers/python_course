@@ -107,7 +107,7 @@ def main():
 
     # Enter a loop gathering SNMP data every 5 minutes for an hour.
     # 13 samples, one every 5 minutes
-    SLEEP_TIME = 10
+    SLEEP_TIME = 5
     for count in range(12):
         print()
         time_track = count * SLEEP_TIME
@@ -129,7 +129,7 @@ def main():
         time.sleep(SLEEP_TIME)
 
     # Create the graphs
-    create_graph(graph_stats, sample_duraction=SLEEP_TIME)
+    create_graph(graph_stats, sample_duration=SLEEP_TIME)
 
 
 if __name__ == '__main__':
