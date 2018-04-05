@@ -1,21 +1,23 @@
 #!/usr/bin/env python
-'''
+"""
 Use Netmiko to change the logging buffer size and to disable console logging
 from a file for both pynet-rtr1 and pynet-rtr2
 
 logging buffered <size>
 no logging console
-'''
+"""
+from __future__ import print_function, unicode_literals
 
 from getpass import getpass
 from netmiko import ConnectHandler
 from test_devices import pynet1, pynet2, juniper_srx
 
+
 def main():
-    '''
+    """
     Use Netmiko to change the logging buffer size and to disable console logging
     from a file for both pynet-rtr1 and pynet-rtr2
-    '''
+    """
     password = getpass()
 
     # Get connection parameters setup correctly
@@ -29,13 +31,14 @@ def main():
 
         # Verify configuration
         output = net_connect.send_command("show run | inc logging")
-        print
-        print '#' * 80
-        print "Device: {}:{}".format(net_connect.ip, net_connect.port)
-        print
-        print output
-        print '#' * 80
-        print
+        print()
+        print('#' * 80)
+        print("Device: {}:{}".format(net_connect.ip, net_connect.port))
+        print()
+        print(output)
+        print('#' * 80)
+        print()
+
 
 if __name__ == "__main__":
     main()

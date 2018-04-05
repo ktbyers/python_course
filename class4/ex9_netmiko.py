@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-'''
+"""
 Use Netmiko to execute 'show arp' on pynet-rtr1, pynet-rtr2, and juniper-srx.
 Use processes or threads to get this to occur concurrently.
-'''
+"""
+from __future__ import print_function, unicode_literals
 
 import multiprocessing
 from datetime import datetime
@@ -15,33 +16,33 @@ from test_devices import pynet1, pynet2, juniper_srx
 
 def print_output(results):
     """Display output."""
-    print "\nSuccessful devices:"
+    print("\nSuccessful devices:")
     for a_dict in results:
-        for identifier, val in a_dict.iteritems():
+        for identifier, val in a_dict.items():
             (success, out_string) = val
             if success:
-                print '\n\n'
-                print '#' * 80
-                print 'Device = {0}\n'.format(identifier)
-                print out_string
-                print '#' * 80
+                print('\n\n')
+                print('#' * 80)
+                print('Device = {0}\n'.format(identifier))
+                print(out_string)
+                print('#' * 80)
 
-    print "\n\nFailed devices:\n"
+    print("\n\nFailed devices:\n")
     for a_dict in results:
-        for identifier, val in a_dict.iteritems():
+        for identifier, val in a_dict.items():
             (success, out_string) = val
             if not success:
-                print 'Device failed = {0}'.format(identifier)
+                print('Device failed = {0}'.format(identifier))
 
-    print "\nEnd time: " + str(datetime.now())
-    print
+    print("\nEnd time: " + str(datetime.now()))
+    print()
 
 
 def worker_cmd(a_device, mp_queue, cmd='show arp'):
-    '''
+    """
     Return a dictionary where the key is the device identifier
     Value is (success|fail(boolean), return_string)
-    '''
+    """
     identifier = '{ip}:{port}'.format(**a_device)
     return_data = {}
 
@@ -57,10 +58,10 @@ def worker_cmd(a_device, mp_queue, cmd='show arp'):
 
 
 def main():
-    '''
+    """
     Use Netmiko to execute 'show arp' on pynet-rtr1, pynet-rtr2, and juniper-srx.
     Use processes or threads to get this to occur concurrently.
-    '''
+    """
     password = getpass()
 
     # Get connection parameters setup correctly
@@ -75,7 +76,7 @@ def main():
     mp_queue = multiprocessing.Queue()
     processes = []
 
-    print "\nStart time: " + str(datetime.now())
+    print("\nStart time: " + str(datetime.now()))
     for a_device in (pynet1, pynet2, juniper_srx):
         p = multiprocessing.Process(target=worker_cmd, args=(a_device, mp_queue))
         processes.append(p)
@@ -92,6 +93,7 @@ def main():
         results.append(mp_queue.get())
 
     print_output(results)
+
 
 if __name__ == "__main__":
     main()
