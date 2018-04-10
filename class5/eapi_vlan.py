@@ -18,6 +18,7 @@ want to use Python's argparse to accomplish the argument processing.
 from __future__ import unicode_literals, print_function
 import pyeapi
 import argparse
+import six
 
 
 def pyeapi_result(output):
@@ -31,7 +32,7 @@ def check_vlan_exists(eapi_conn, vlan_id):
 
     Return either vlan_name or False
     """
-    vlan_id = str(vlan_id)
+    vlan_id = six.text_type(vlan_id)
     cmd = 'show vlan id {}'.format(vlan_id)
     try:
         response = eapi_conn.enable(cmd)
@@ -79,7 +80,7 @@ def main():
     cli_args = parser.parse_args()
     vlan_id = cli_args.vlan_id
     remove = cli_args.remove
-    vlan_name = cli_args.vlan_name
+    vlan_name = six.text_type(cli_args.vlan_name)
 
     # Check if VLAN already exists
     check_vlan = check_vlan_exists(eapi_conn, vlan_id)

@@ -6,6 +6,7 @@ the interfaces on the switch.  Accomplish this using Arista's pyeapi library.
 """
 from __future__ import print_function, unicode_literals
 import pyeapi
+import six
 
 
 def pyeapi_result(output):
@@ -32,8 +33,8 @@ def main():
     # Print output data
     print("\n{:20} {:<20} {:<20}".format("Interface:", "inOctets", "outOctets"))
     for intf, octets in sorted(data_stats.items()):
-        # A bit dangerous to cast to 'str' since unicode in PY3/ASCII in PY2
-        print("{:20} {:<20} {:<20}".format(intf, str(octets[0]), str(octets[1])))
+        print("{:20} {:<20} {:<20}".format(intf, six.text_type(octets[0]),
+                                           six.text_type(octets[1])))
 
     print()
 
