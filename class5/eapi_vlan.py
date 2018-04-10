@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-'''
+"""
 Using Arista's pyeapi, create a script that allows you to add a VLAN (both the
 VLAN ID and the VLAN name).  Your script should first check that the VLAN ID is
 available and only add the VLAN if it doesn't already exist.  Use VLAN IDs
@@ -14,23 +14,23 @@ If you call the script with the --remove option, the VLAN will be removed.
 
 Once again only remove the VLAN if it exists on the switch.  You will probably
 want to use Python's argparse to accomplish the argument processing.
-'''
-
+"""
+from __future__ import unicode_literals, print_function
 import pyeapi
 import argparse
 
+
 def pyeapi_result(output):
-    '''
-    Return the 'result' value from the pyeapi output
-    '''
+    """Return the 'result' value from the pyeapi output."""
     return output[0]['result']
 
+
 def check_vlan_exists(eapi_conn, vlan_id):
-    '''
+    """
     Check if the given VLAN exists
 
     Return either vlan_name or False
-    '''
+    """
     vlan_id = str(vlan_id)
     cmd = 'show vlan id {}'.format(vlan_id)
     try:
@@ -39,17 +39,17 @@ def check_vlan_exists(eapi_conn, vlan_id):
         return check_vlan[vlan_id]['name']
     except (pyeapi.eapilib.CommandError, KeyError):
         pass
-
     return False
 
+
 def configure_vlan(eapi_conn, vlan_id, vlan_name=None):
-    '''
+    """
     Add the given vlan_id to the switch
 
     Set the vlan_name (if provided)
 
     Note, if the vlan already exists, then this will just set the vlan_name
-    '''
+    """
     command_str1 = 'vlan {}'.format(vlan_id)
     cmd = [command_str1]
     if vlan_name is not None:
@@ -57,10 +57,9 @@ def configure_vlan(eapi_conn, vlan_id, vlan_name=None):
         cmd.append(command_str2)
     return eapi_conn.config(cmd)
 
+
 def main():
-    '''
-    Add/remove vlans from Arista switch in an idempotent manner
-    '''
+    """Add/remove vlans from Arista switch in an idempotent manner."""
     eapi_conn = pyeapi.connect_to("pynet-sw2")
 
     # Argument parsing
@@ -88,22 +87,22 @@ def main():
     # check if action is remove or add
     if remove:
         if check_vlan:
-            print "VLAN exists, removing it"
+            print("VLAN exists, removing it")
             command_str = 'no vlan {}'.format(vlan_id)
             eapi_conn.config([command_str])
         else:
-            print "VLAN does not exist, no action required"
+            print("VLAN does not exist, no action required")
     else:
         if check_vlan:
             if vlan_name is not None and check_vlan != vlan_name:
-                print "VLAN already exists, setting VLAN name"
+                print("VLAN already exists, setting VLAN name")
                 configure_vlan(eapi_conn, vlan_id, vlan_name)
             else:
-                print "VLAN already exists, no action required"
+                print("VLAN already exists, no action required")
         else:
-            print "Adding VLAN including vlan_name (if present)"
+            print("Adding VLAN including vlan_name (if present)")
             configure_vlan(eapi_conn, vlan_id, vlan_name)
+
 
 if __name__ == "__main__":
     main()
-
