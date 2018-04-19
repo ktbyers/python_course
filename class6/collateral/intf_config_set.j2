@@ -1,0 +1,6 @@
+{% set new_netmask = '/24' %}
+interface FastEthernet4
+ description *** LAN connection (don't change) ***
+ ip address {{ ip_addr }}{{ new_netmask }}
+ duplex auto
+ speed auto

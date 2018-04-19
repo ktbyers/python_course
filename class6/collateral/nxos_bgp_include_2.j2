@@ -1,0 +1,8 @@
+
+feature bgp
+router bgp {{ local_as }}
+  address-family ipv4 unicast
+    network {{ advertised_route1 }}
+    network {{ advertised_route2 }}
+    network {{ advertised_route3 }}
+  {%- include peer_template %}

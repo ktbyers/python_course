@@ -1,0 +1,8 @@
+
+feature bgp
+router bgp {{ local_as }}
+  {% include 'bgp_ipv4_routes.j2' %}
+  neighbor {{ peer1_ip }} remote-as {{ peer1_as }}
+    update-source loopback1
+    ebgp-multihop 2
+    address-family ipv4 unicast

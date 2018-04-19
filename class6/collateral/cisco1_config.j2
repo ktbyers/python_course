@@ -1,0 +1,142 @@
+!
+! Last configuration change at 09:57:51 PDT Wed Apr 18 2018 by pyclass
+! NVRAM config last updated at 14:55:08 PDT Wed Apr 18 2018 by pyclass
+!
+version 15.4
+no service pad
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+no service password-encryption
+!
+hostname pynet-rtr1
+!
+boot-start-marker
+boot system flash c880data-universalk9-mz.154-2.T1.bin
+boot-end-marker
+!
+!
+logging buffered 10000
+no logging console
+enable secret 5 $1$39ck$xxxZ2sWVn17YCXhSWa48R/
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local if-authenticated 
+!
+!
+!
+!
+!
+aaa session-id common
+memory-size iomem 10
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name twb-tech.com
+ip cef
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+license udi pid CISCO881-SEC-K9 sn FTX1000001X
+!
+!
+archive
+ path flash:pynet-rtr1-cfg
+file prompt quiet
+username pyclass privilege 15 secret 5 $1$DAXe$pxxnB1jFHAQAWt/1eXub21
+username testuser privilege 15 secret 5 $1$B5cD$5XACwB/8iwj2U
+username test9 secret 5 $1$CQCe$paanX1jABCQAWt/7eXyb21
+!
+!
+!
+!
+lldp run
+!
+ip ssh version 2
+ip scp server enable
+! 
+!
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+!
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface FastEthernet4
+ description *** LAN connection (don't change) ***
+ ip address 10.220.88.20 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+!
+router bgp 42
+ bgp router-id 10.220.88.20
+ bgp log-neighbor-changes
+ neighbor 10.220.88.38 remote-as 44
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 10.220.88.1
+!
+ip access-list extended VPN-TEST1
+ip access-list extended VPN-TEST2
+ip access-list extended VPN-TEST3
+ip access-list extended VPN-TEST4
+ip access-list extended VPN-TEST5
+!
+!
+snmp-server group READONLY v3 priv read VIEWSTD access 98
+snmp-server view VIEWSTD iso included
+snmp-server community invalid RO 98
+snmp-server ifindex persist
+access-list 98 remark *** SNMP ***
+access-list 98 permit any
+!
+!
+!
+control-plane
+!
+!
+no vstack
+!
+line con 0
+ logging synchronous
+ no modem enable
+line aux 0
+line vty 0 4
+ exec-timeout 20 0
+ transport input telnet ssh
+!
+scheduler max-task-time 5000
+ntp server 130.126.24.24
+ntp server 152.2.21.1
+onep
+ transport type tls localcert TP-self-signed-1429897839 disable-remotecert-validation
+ service set vty
+!
+end

@@ -1,0 +1,6 @@
+snmp-server group READONLY v3 priv read VIEWSTD access 98
+snmp-server view VIEWSTD iso included
+snmp-server community invalid RO 98
+snmp-server ifindex persist
+access-list 98 remark *** SNMP *** 
+access-list 98 permit any 
