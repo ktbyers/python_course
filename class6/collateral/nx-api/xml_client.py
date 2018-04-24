@@ -26,6 +26,7 @@ class XMLClient(object):
     def _build_payload(self, commands, method, xml_version='1.0', version=1):
         if len(commands) > 1:
             command = 0
+            # This section for multiple commands is probably not correct.
             for item in commands:
                 if command == 0:
                     command = item
