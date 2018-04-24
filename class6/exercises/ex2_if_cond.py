@@ -14,15 +14,10 @@ router ospf 40
 
 The Jinja2 template should be read from an external file named 'ospf_config.j2'.
 
-The following items should all be variables in the template:
-process_id
-network         # For the 10.220.88.0 OSPF network
-wildcard        # For the corresponding wildcard mask
-area            # The area that this network belongs to
-loopback0_addr
-loopback0_maks
+The following items should all be variables in the template: process_id, network, wildcard,
+area, loopback0_addr, loopback0_mask.
 
-Additionally, the interface Loopback0 and its ip address config should only be generated
+Additionally, the 'interface Loopback0' and its ip address configuration should only be generated
 if the loopback0_addr variable is defined (i.e. use an if-condition here).
 
 """

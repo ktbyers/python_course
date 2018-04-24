@@ -2,10 +2,14 @@
 """
 Use Jinja2 to generate the following configuration:
 
+--------
 router ospf 40
  network 10.220.88.0 0.0.0.255 area 0
+--------
 
-The process ID, network, wildcard mask, and area should all be variables to the template.
+The process ID, network, wildcard mask, and area should all be variables in the Jinja2 template.
+
+Use a template directly embedded in your Python script.
 
 """
 from __future__ import print_function, unicode_literals
