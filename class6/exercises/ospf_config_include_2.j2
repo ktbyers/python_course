@@ -1,0 +1,9 @@
+
+{%- include 'nxos_global_ospf.j2' %}
+
+interface Ethernet2/1
+  ip address 172.16.88.1/24
+  ip router ospf 40 area 0.0.0.0
+
+interface loopback0
+  ip address 172.31.255.1/24

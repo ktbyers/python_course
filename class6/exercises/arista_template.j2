@@ -1,0 +1,28 @@
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ hostname }}
+!
+ntp server {{ ntp1 }}
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+{% include 'users.j2' %}
+!
+clock timezone America/Los_Angeles
+!
+{% include 'interfaces.j2' %}
+!
+ip route 0.0.0.0/0 {{ gateway }}
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end
