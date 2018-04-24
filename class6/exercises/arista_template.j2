@@ -1,9 +1,9 @@
 !
-transceiver qsfp default-mode 4x10G
+hostname sanfran-sw4
 !
-hostname {{ hostname }}
+ntp server 10.10.10.24
 !
-ntp server {{ ntp1 }}
+{% include 'snmp.j2' %}
 !
 spanning-tree mode mstp
 !
@@ -11,13 +11,33 @@ aaa authorization exec default local
 !
 no aaa root
 !
-{% include 'users.j2' %}
+{% include 'arista_users.j2' %}
 !
 clock timezone America/Los_Angeles
 !
-{% include 'interfaces.j2' %}
+interface Ethernet1
+   spanning-tree portfast
+   spanning-tree cost 1
 !
-ip route 0.0.0.0/0 {{ gateway }}
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address 10.10.88.31/24
+!
+ip route 0.0.0.0/0 10.10.88.1
 !
 ip routing
 !
