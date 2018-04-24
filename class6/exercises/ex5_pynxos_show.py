@@ -1,25 +1,39 @@
 #!/usr/bin/env python
 """
-Generate four configs:
+Use the pynxos library to create an NX-API connection to both nxos1.twb-tech.com and to
+nxos2.twb-tech.com.
 
-pynet-sw1 through pynet-sw4
-IP = 10.220.88.28/24 - 10.220.88.31/24
-ntp1 and gateway stay the same
+Use the pynxos 'show' method to execute and retrieve 'show hostname' from each of the devices.
+Print this show hostname output to standard output.
 """
 from __future__ import print_function, unicode_literals
-from jinja2 import FileSystemLoader, StrictUndefined
-from jinja2.environment import Environment
+from pynxos.device import Device
+from getpass import getpass
 
-env = Environment(undefined=StrictUndefined)
-env.loader = FileSystemLoader('.')
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-device_vars = {
-    'hostname': 'pynet-sw4',
-    'ntp1': '130.126.24.24',
-    'vlan1_ip': '10.220.88.31/24',
-    'gateway': '10.220.88.1',
+password = getpass()
+nxos1 = {
+    'host': 'nxos1.twb-tech.com',
+    'username': 'pyclass',
+    'password': password,
+    'transport': 'https',
+    'port': 8443,
+}
+nxos2 = {
+    'host': 'nxos2.twb-tech.com',
+    'username': 'pyclass',
+    'password': password,
+    'transport': 'https',
+    'port': 8443,
 }
 
-template_file = 'arista_template.j2'
-template = env.get_template(template_file)
-print(template.render(device_vars))
+print()
+for device in (nxos1, nxos2):
+    nxapi_conn = Device(**device)
+    print('-' * 40)
+    print(nxapi_conn.show('show hostname'))
+    print('-' * 40)
+print()
