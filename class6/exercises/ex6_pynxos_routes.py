@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-Use the pynxos library to create an NX-API connection to both nxos1.twb-tech.com and to
-nxos2.twb-tech.com.
+Use the pynxos library and NX-API to retrieve the output of 'show ip route vrf management' from the
+nxos1 switch. 
 
-Use the pynxos 'show' method to retrieve 'show hostname' from each of the devices.
-Print this show hostname output to standard output.
+Parse the returned data structure and from this, retrieve the next hop for the
+default route. Print this to standard output.
 """
 from __future__ import print_function, unicode_literals
 from pynxos.device import Device
