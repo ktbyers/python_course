@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Use the pynxos library and NX-API to retrieve the output of 'show ip route vrf management' from the
-nxos1 switch. 
+nxos1 switch.
 
 Parse the returned data structure and from this, retrieve the next hop for the
 default route. Print this to standard output.

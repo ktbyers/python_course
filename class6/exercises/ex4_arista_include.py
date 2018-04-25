@@ -56,7 +56,7 @@ management api http-commands
 end
 --------
 
-The main template should be stored in an external file named 'arista_template.j2'. 
+The main template should be stored in an external file named 'arista_template.j2'.
 
 This template should use the Jinja2 include statement to pull in two additional templates. The
 first template should be named 'arista_users.j2' and should contain the two username statements.
