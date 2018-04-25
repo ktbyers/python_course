@@ -3,7 +3,7 @@
 Use the pynxos library to create an NX-API connection to both nxos1.twb-tech.com and to
 nxos2.twb-tech.com.
 
-Use the pynxos 'show' method to execute and retrieve 'show hostname' from each of the devices.
+Use the pynxos 'show' method to retrieve 'show hostname' from each of the devices.
 Print this show hostname output to standard output.
 """
 from __future__ import print_function, unicode_literals
