@@ -1,0 +1,11 @@
+pynet-rtr1(config)#ip name-server 1.1.1.1
+pynet-rtr1(config)#ip dom
+pynet-rtr1(config)#ip domain-lo
+pynet-rtr1(config)#ip domain-lookup ?
+  nsap              Enable IP DNS queries for CLNS NSAP addresses
+  source-interface  Specify source interface for DNS resolver
+  <cr>
+
+pynet-rtr1(config)#ip domain-lookup 
+
+ping google.com

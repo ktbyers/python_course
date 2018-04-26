@@ -1,0 +1,2 @@
+ip name-server vrf default 1.1.1.1
+ip name-server vrf default 8.8.8.8

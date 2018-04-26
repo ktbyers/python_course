@@ -1,0 +1,2 @@
+ip name-server 1.1.1.1 use-vrf management
+ip name-server 8.8.8.8 use-vrf management

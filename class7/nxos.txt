@@ -1,0 +1,6 @@
+nxos1# show run | inc ntp
+ntp server 130.126.24.24
+ntp server 152.2.21.1
+nxos1# show run | inc name-ser
+ip name-server 1.1.1.1 use-vrf management
+
