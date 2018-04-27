@@ -1,12 +1,21 @@
 #!/usr/bin/env python
 """
-Connect to set of network devices using NAPALM (different platforms); print
-out the facts.
+Using NAPALM retreive 'get_bgp_neighbors' from pynet-rtr1. Parse the returned data structure to and
+verify that the BGP peer to 10.220.88.38 is in the established state ('is_up' field in the NAPALM
+returned data structure).
 """
 from __future__ import print_function, unicode_literals
-from pprint import pprint
 from napalm import get_network_driver
 from my_devices import pynet_rtr1
+
+
+def retrive_bgp_neighbor(bgp_data, neighbor):
+    """
+    Parse the output from NAPALM's get_bgp_neighbors()
+
+    Retrieve the specified neighbor's BGP dictionary.
+    """
+    return bgp_data['global']['peers'][neighbor]
 
 
 def main():
@@ -24,10 +33,15 @@ def main():
         device.open()
 
         print("-" * 50)
-        bgp_info = device.get_bgp_neighbors()
         hostname = a_device['hostname']
         print("{hostname}:\n".format(hostname=hostname))
-        pprint(bgp_info)
+
+        # Retrieve BGP information and parse returned data
+        bgp_info = device.get_bgp_neighbors()
+        bgp_neighbor = '10.220.88.38'
+        bgp_neighbor_dict = retrive_bgp_neighbor(bgp_info, bgp_neighbor)
+        bgp_state = bgp_neighbor_dict['is_up']
+        print("BGP Neighbor: {}, BGP Established State: {}".format(bgp_neighbor, bgp_state))
         print()
 
     print()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-Connect to set of network devices using NAPALM (different platforms); print
-out the facts.
+Using NAPALM retrieve 'get_lldp_neighbors' from pynet-rtr1 and from pynet-rtr2. Print out retrieved
+LLDP information to standard output.
 """
 from __future__ import print_function, unicode_literals
 from pprint import pprint
@@ -10,10 +10,7 @@ from my_devices import pynet_rtr1, pynet_rtr2
 
 
 def main():
-    """
-    Connect to set of network devices using NAPALM (different platforms); print
-    out the facts.
-    """
+    """Retrieve LLDP information."""
     for a_device in (pynet_rtr1, pynet_rtr2):
         device_type = a_device.pop('device_type')
         driver = get_network_driver(device_type)

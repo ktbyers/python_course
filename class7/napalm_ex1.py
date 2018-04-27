@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 """
 Connect to set of network devices using NAPALM (different platforms); print
-out the facts.
+out the device facts.
 """
 from __future__ import print_function, unicode_literals
 from napalm import get_network_driver
 from my_devices import device_list
+
+# Disable NX-OS certificate warning
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def main():
