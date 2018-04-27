@@ -13,31 +13,61 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
-def main():
-    """Test NAPALM config merge operations on one of the Cisco routers."""
-    env = Environment(undefined=StrictUndefined)
+def generate_config(loader_dir):
+    """Generate the device configuration from a template."""
+    jinja_env = Environment(undefined=StrictUndefined)
     template_vars = {
         'dns1': '1.1.1.1',
         'dns2': '8.8.8.8',
     }
     template_file = 'dns.j2'
 
+    jinja_env.loader = FileSystemLoader(loader_dir)
+    template = jinja_env.get_template(template_file)
+    return template.render(template_vars)
+
+
+def ping_google(device):
+    "Use NAPALM to ping google.com to validate DNS resolution."""
+    print()
+    print(">>>Test ping to google.com")
+    ping_output = device.ping(destination='google.com')
+    if not ping_output == {}:
+        probes_sent = int(ping_output['success']['probes_sent'])
+        packet_loss = int(ping_output['success']['packet_loss'])
+        successful_pings = probes_sent - packet_loss
+        print("Probes sent: {}".format(probes_sent))
+        print("Packet loss: {}".format(packet_loss))
+        if successful_pings > 0:
+            print("Pings Successful: {}".format(successful_pings))
+            return
+
+    print("Ping failed")
+
+
+def main():
+    """Test NAPALM config merge operations on one of the Cisco routers."""
+
     for a_device in (pynet_rtr1, pynet_sw1, nxos1):
         device_type = a_device.pop('device_type')
-        driver = get_network_driver(device_type)
-        device = driver(**a_device)
 
+        # Directory where template and config file will be stored
         base_dir = './CFGS/{}'.format(device_type)
         dns_file = '{}/dns.txt'.format(base_dir)
-        env.loader = FileSystemLoader(base_dir)
 
-        template = env.get_template(template_file)
-        dns_output = (template.render(template_vars))
+        # Generate config file from a template
+        dns_output = generate_config(loader_dir=base_dir)
+
+        # Write generated config to file
         with open(dns_file, 'w') as f:
             f.write(dns_output)
 
         print()
+        print('-' * 50)
+        print("Platform: {}".format(device_type))
         print(">>>Device open")
+        driver = get_network_driver(device_type)
+        device = driver(**a_device)
         device.open()
 
         print()
@@ -46,8 +76,8 @@ def main():
         print(device.compare_config())
         device.commit_config()
 
-        ping_output = device.ping(destination='google.com')
-        print(ping_output)
+        ping_google(device)
+        print("\n\n")
 
     print()
 

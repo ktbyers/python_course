@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from __future__ import print_function, unicode_literals
 """Test NAPALM config merge operations on one of the Cisco routers."""
+from __future__ import print_function, unicode_literals
 from napalm import get_network_driver
 from my_devices import pynet_rtr1
 
