@@ -19,10 +19,7 @@ def retrive_bgp_neighbor(bgp_data, neighbor):
 
 
 def main():
-    """
-    Connect to set of network devices using NAPALM (different platforms); print
-    out the facts.
-    """
+    """Retrieve get_bgp_neighbors and parse the output."""
     for a_device in (pynet_rtr1,):
         device_type = a_device.pop('device_type')
         driver = get_network_driver(device_type)
