@@ -2,9 +2,6 @@
 """Test NAPALM config merge operations on one of the Cisco routers."""
 from __future__ import print_function, unicode_literals
 
-from jinja2 import FileSystemLoader, StrictUndefined
-from jinja2.environment import Environment
-
 from napalm import get_network_driver
 from my_devices import pynet_rtr1, pynet_sw1, nxos1
 
@@ -17,7 +14,11 @@ def ping_google(device):
     "Use NAPALM to ping google.com to validate DNS resolution."""
     print()
     print(">>>Test ping to google.com")
-    ping_output = device.ping(destination='google.com')
+    try:
+        ping_output = device.ping(destination='google.com')
+    except NotImplementedError:
+        print("Ping failed: ping() method not implemented")
+        return
     if not ping_output == {}:
         probes_sent = int(ping_output['success']['probes_sent'])
         packet_loss = int(ping_output['success']['packet_loss'])
