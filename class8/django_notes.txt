@@ -1,5 +1,5 @@
 # Some basic Django operations
-# Assumes Django >= 1.8
+# Assumes Django >= 1.11
 
 
 # Initial DB configuration

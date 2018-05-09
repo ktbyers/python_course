@@ -3,7 +3,7 @@
 from __future__ import print_function, unicode_literals
 import django
 django.setup()
-from net_system.models import NetworkDevice
+from net_system.models import NetworkDevice     # noqa
 
 
 def main():

@@ -5,10 +5,10 @@ Use Netmiko to connect to each of the devices in the database. Execute
 """
 from __future__ import print_function, unicode_literals
 from datetime import datetime
+from netmiko import ConnectHandler
 import django
 django.setup()
-from netmiko import ConnectHandler
-from net_system.models import NetworkDevice
+from net_system.models import NetworkDevice     # noqa
 
 
 def show_version(a_device):

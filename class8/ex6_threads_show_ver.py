@@ -6,12 +6,11 @@ Use threads and Netmiko to connect to each of the devices in the database. Execu
 from __future__ import print_function, unicode_literals
 from netmiko import ConnectHandler
 from datetime import datetime
+import threading
 
 import django
 django.setup()
-from net_system.models import NetworkDevice
-
-import threading
+from net_system.models import NetworkDevice     # noqa
 
 
 def show_version(a_device):

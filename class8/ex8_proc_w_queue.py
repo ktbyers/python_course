@@ -7,12 +7,12 @@ Record the amount of time required to do this.
 from __future__ import print_function, unicode_literals
 from netmiko import ConnectHandler
 from datetime import datetime
+from multiprocessing import Process, Queue
 
 import django
 django.setup()
 
-from net_system.models import NetworkDevice
-from multiprocessing import Process, Queue
+from net_system.models import NetworkDevice     # noqa
 
 
 def show_version_queue(a_device, output_q):

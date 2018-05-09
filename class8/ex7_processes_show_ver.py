@@ -6,11 +6,11 @@ Use processes and Netmiko to connect to each of the devices in the database. Exe
 from __future__ import print_function, unicode_literals
 from netmiko import ConnectHandler
 from datetime import datetime
+from multiprocessing import Process
 import django
 django.setup()
 
-from net_system.models import NetworkDevice
-from multiprocessing import Process
+from net_system.models import NetworkDevice     # noqa
 
 
 def show_version(a_device):
