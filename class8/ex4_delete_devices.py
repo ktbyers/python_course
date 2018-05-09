@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """Remove the two objects created in exercise #3 from the database."""
 from __future__ import print_function, unicode_literals
-from net_system.models import NetworkDevice
 import django
+django.setup()
+from net_system.models import NetworkDevice
 
 
 def main():
     """Remove the two objects created in exercise #3 from the database."""
-    django.setup()
     try:
         test_rtr1 = NetworkDevice.objects.get(device_name='test-rtr1')
         test_rtr2 = NetworkDevice.objects.get(device_name='test-rtr2')

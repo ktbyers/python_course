@@ -4,8 +4,9 @@ Create two new test NetworkDevices in the database. Use both direct object creat
 and the .get_or_create() method to create the devices.
 '''
 from __future__ import print_function, unicode_literals
-from net_system.models import NetworkDevice
 import django
+django.setup()
+from net_system.models import NetworkDevice
 
 
 def main():
@@ -13,7 +14,6 @@ def main():
     Create two new test NetworkDevices in the database. Use both direct object creation
     and the .get_or_create() method to create the devices.
     '''
-    django.setup()
     try:
         ip_addr = raw_input("Enter IP address: ")
     except NameError:

@@ -6,6 +6,7 @@ Use Netmiko to connect to each of the devices in the database. Execute
 from __future__ import print_function, unicode_literals
 from datetime import datetime
 import django
+django.setup()
 from netmiko import ConnectHandler
 from net_system.models import NetworkDevice
 
@@ -30,8 +31,6 @@ def main():
     Use Netmiko to connect to each of the devices in the database. Execute
     'show version' on each device.
     """
-    django.setup()
-
     start_time = datetime.now()
     devices = NetworkDevice.objects.all()
     for a_device in devices:

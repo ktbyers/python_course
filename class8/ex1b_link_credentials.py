@@ -2,12 +2,12 @@
 """Accomplish class #8, exercise1b using a script"""
 from __future__ import print_function, unicode_literals
 import django
+django.setup()
 from net_system.models import NetworkDevice, Credentials
 
 
 def main():
     """Link credentials to devices"""
-    django.setup()
     net_devices = NetworkDevice.objects.all()
     creds = Credentials.objects.all()
 

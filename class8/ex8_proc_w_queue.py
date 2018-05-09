@@ -8,9 +8,10 @@ from __future__ import print_function, unicode_literals
 from netmiko import ConnectHandler
 from datetime import datetime
 
-from net_system.models import NetworkDevice
 import django
+django.setup()
 
+from net_system.models import NetworkDevice
 from multiprocessing import Process, Queue
 
 
@@ -39,8 +40,6 @@ def main():
     'show version' on each device. Use a queue to pass the output back to the parent process.
     Record the amount of time required to do this.
     '''
-    django.setup()
-
     start_time = datetime.now()
     output_q = Queue(maxsize=20)
     devices = NetworkDevice.objects.all()
