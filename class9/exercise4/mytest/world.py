@@ -1,9 +1,13 @@
 '''
 Python class on writing reusable code
 '''
+from __future__ import print_function, unicode_literals
+
+
 def func1():
     '''Simple test function'''
-    print "Hello world"
+    print("Hello world")
+
 
 class MyClass(object):
     '''Simple test class'''
@@ -14,19 +18,20 @@ class MyClass(object):
 
     def hello(self):
         '''Simple test method'''
-        print "Hello World: {} {} {}".format(self.var1, self.var2, self.var3)
+        print("Hello World: {} {} {}".format(self.var1, self.var2, self.var3))
 
     def not_hello(self):
         '''Simple test method'''
-        print "Goodbye: {} {} {}".format(self.var1, self.var2, self.var3)
+        print("Goodbye: {} {} {}".format(self.var1, self.var2, self.var3))
+
 
 if __name__ == "__main__":
-    print "\nMain program - world"
+    print("\nMain program - world")
 
     # Some test code
     my_obj = MyClass('SF', 'NYC', 'LA')
-    print
-    print my_obj.var1, my_obj.var2, my_obj.var3
+    print()
+    print(my_obj.var1, my_obj.var2, my_obj.var3)
     my_obj.hello()
     my_obj.not_hello()
-    print
+    print()

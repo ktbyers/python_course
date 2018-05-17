@@ -1,9 +1,13 @@
 '''
 Python class on writing reusable code
 '''
+from __future__ import print_function, unicode_literals
+
+
 def func1():
     '''Simple test function'''
-    print "Hello world"
+    print("Hello world")
+
 
 class MyClass(object):
     '''Simple test class'''
@@ -14,29 +18,31 @@ class MyClass(object):
 
     def hello(self):
         '''Simple test method'''
-        print "Hello World: {} {} {}".format(self.var1, self.var2, self.var3)
+        print("Hello World: {} {} {}".format(self.var1, self.var2, self.var3))
 
     def not_hello(self):
         '''Simple test method'''
-        print "Goodbye: {} {} {}".format(self.var1, self.var2, self.var3)
+        print("Goodbye: {} {} {}".format(self.var1, self.var2, self.var3))
+
 
 class MyChildClass(MyClass):
     '''Simple test class'''
     def hello(self):
         '''Simple test method'''
-        print "Something else: {} {} {}".format(self.var1, self.var2, self.var3)
+        print("Something else: {} {} {}".format(self.var1, self.var2, self.var3))
+
 
 if __name__ == "__main__":
-    print "\nMain program - world"
+    print("\nMain program - world")
 
-    print "\nTesting MyClass:"
+    print("\nTesting MyClass:")
     my_obj = MyClass('SF', 'NYC', 'LA')
-    print my_obj.var1, my_obj.var2, my_obj.var3
+    print(my_obj.var1, my_obj.var2, my_obj.var3)
     my_obj.hello()
     my_obj.not_hello()
 
-    print "\nTesting MyChildClass:"
+    print("\nTesting MyChildClass:")
     new_obj = MyChildClass('X', 'Y', 'Z')
     new_obj.hello()
     new_obj.not_hello()
-    print
+    print()

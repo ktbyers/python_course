@@ -6,24 +6,26 @@ a. Verify that you can import mytest and call the three functions func1(),
 b. Create an object that uses MyClass. Verify that you call the hello() and
    not_hello() methods.
 '''
-
+from __future__ import print_function, unicode_literals
 from mytest import func1, func2, func3, MyClass
+
 
 def main():
     '''Main func'''
-    print
-    print "Testing func1...",
+    print()
+    print("Testing func1...", end="")
     func1()
-    print "Testing func2...",
+    print("Testing func2...", end="")
     func2()
-    print "Testing func3...",
+    print("Testing func3...", end="")
     func3()
 
-    print "\nTesting MyClass..."
+    print("\nTesting MyClass...")
     my_obj = MyClass('a', 'b', 'c')
     my_obj.hello()
     my_obj.not_hello()
-    print
+    print()
+
 
 if __name__ == "__main__":
     main()
