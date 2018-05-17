@@ -1,3 +1,7 @@
+# Note this test was performed using PY2; recent versions of PY3 will allow you to import the
+# package even though no __init__.py exists (i.e. PY3 >= 3.3 will allow packages without 
+# __init__.py files in certain contexts).
+
 $ python
 
 >>> import mytest
