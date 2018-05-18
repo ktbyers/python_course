@@ -1,0 +1,11 @@
+<software-information>
+  <host-name model='srx'>pynet-jnpr-srx1</host-name>
+  <host-name model='srx'>pynet-jnpr-srx2</host-name>
+  <product-model>srx100h2</product-model>
+  <product-name>srx100h2</product-name>
+  <jsr/>
+  <package-information>
+    <name>junos</name>
+    <comment>JUNOS Software Release [12.1X44-D35.5]</comment>
+  </package-information>
+</software-information>
