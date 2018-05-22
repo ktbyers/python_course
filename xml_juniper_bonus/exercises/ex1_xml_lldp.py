@@ -1,23 +1,26 @@
 #!/usr/bin/env python
 """
-Read in the file named 'show_lldp.xml'. This is modified output from
-'show lldp neighbors | display xml' on a Juniper SRX.
+Read in the file named 'show_lldp.xml'. This file is from
+'show lldp neighbors | display xml' on a Juniper SRX (modified somewhat).
 
-Using etree.tostring() print out the XML tree as a string.
+Use etree.tostring() to print out the XML tree as a string.
 
-Using getchildren() or list indices find the one child element of the root element. Print out
-this element's tag.
+Use getchildren() or list indices to find the one child element of the root element. Print out
+this element's tag name.
 
 Using either a for-loop or getchildren(), find the text values associated with the following
 tags: 'lldp-local-interface', 'lldp-remote-system-name', 'lldp-remote-port-description'. Save
 these three items to a data structure with the following format:
 
-{ local_intf: {
-    'remote_port': value,
-    'remote_sys_name': value,
+{ local_intf:
+    {
+        'remote_port': value,
+        'remote_sys_name': value,
+    }
 }
 
-Print this data structure to the screen. Your printed data structure should match the following:
+Print this data structure out to the screen. Your printed data structure should match the
+following:
 
 {'fe-0/0/7.0': {'remote_port': '24', 'remote_sys_name': 'twb-sf-hpsw1'}}
 

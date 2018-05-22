@@ -1,23 +1,27 @@
 #!/usr/bin/env python
 """
-1. Read in 'show_arp.xml'
+Read in the file named 'show_arp.xml'. This file is from 'show arp | display xml' on a
+Juniper SRX (modified somewhat).
 
-2. Print it to the screen using tostring()
+Use etree.tostring() to print out the XML tree as a string.
 
-3. Use XPATH to create a dictionary of:
+Use XPath parsing to find all of the arp entries and to construct the following
+dictionary:
 
-    'ip_addr': {
-        'mac_addr': value,
-        'intf': value,
-    }
+{
+  '10.220.88.1':
+     {
+        'intf': 'vlan.0',
+        'mac_addr': '00:62:ec:29:70:fe'
+     },
+  '10.220.88.20':
+     {
+        'intf': 'vlan.0',
+        'mac_addr': 'c8:9c:1d:ea:0e:b6'
+     }
+}
 
-        <mac-address>00:62:ec:29:70:fe</mac-address>
-        <ip-address>10.220.88.1</ip-address>
-        <interface-name>vlan.0</interface-name>
-
-        <mac-address>c8:9c:1d:ea:0e:b6</mac-address>
-        <ip-address>10.220.88.20</ip-address>
-        <interface-name>vlan.0</interface-name>
+Print this dictionary out to standard output.
 """
 from __future__ import unicode_literals, print_function
 from lxml import etree
