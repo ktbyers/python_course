@@ -1,28 +1,30 @@
-'''
-a. Create a repository in GitHub. Make sure that repository has a README.md file.
-
-b. Clone that repository into the lab environment.
-
-c. Use 'git add' and 'git commit' to modify the README.md file.
-
-d. Use 'git add' to add another python script into the repository.
-
-e. Use 'git rm' to delete that Python script from the repository.
-
-f. Use 'git push' to push the updated repository back up to GitHub.
-
-g. In GitHub, fork the python_course repository (https://github.com/ktbyers/python_course).
-
-h. Clone this repository (your fork) onto the AWS server
-
-i. Create a new 'bonus' branch for this repository.
-
-j. Make a modification to a file in this branch; and commit the change.
-
-k. Push your new branch back up to GitHub (verify it and your change are there).
-
-l. Switch back to the master branch
-'''
+#
+# GIT Exercises
+# 
+# a. Create a repository named 'python_course_test1' in GitHub. Make sure this repository has a README.md file.
+# 
+# b. Git clone that repository into the lab environment.
+# 
+# c. Use 'git add' and 'git commit' to modify the README.md file.
+# 
+# d. Use 'git add' to add another python script into the repository.
+# 
+# e. Use 'git rm' to delete that Python script from the repository.
+# 
+# f. Use 'git push' to push the updated repository back up to GitHub.
+# 
+# g. In GitHub, fork the python_course repository (https://github.com/ktbyers/python_course).
+# 
+# h. Clone this repository (your fork) onto the AWS server
+# 
+# i. Create a new 'bonus' branch for this repository.
+# 
+# j. Make a modification to the README.md file in this branch and commit the change.
+# 
+# k. Push your new 'bonus' branch back up to GitHub (verify the branch and your change are now on GitHub).
+# 
+# l. Switch back to the master branch
+# 
 
 Go to github.com/user (i.e. your GitHub page)
 
