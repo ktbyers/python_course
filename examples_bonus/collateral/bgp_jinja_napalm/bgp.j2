@@ -1,0 +1,5 @@
+router bgp {{ local_as }}
+   {%- for bgp_dict in bgp_peers %}
+   neighbor {{ bgp_dict.peer_ip }} remote-as {{ bgp_dict.peer_as }}
+   neighbor {{ bgp_dict.peer_ip }} maximum-routes 12000 
+   {%- endfor %}
