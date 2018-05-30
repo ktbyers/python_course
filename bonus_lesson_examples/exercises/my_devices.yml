@@ -1,0 +1,24 @@
+---
+arista1:
+    device_type: arista_eos
+    host: arista1.twb-tech.com
+    username: pyclass
+    file_system: /mnt/flash
+
+arista2:
+    device_type: arista_eos
+    host: arista2.twb-tech.com
+    username: pyclass
+    file_system: /mnt/flash
+
+arista3:
+    device_type: arista_eos
+    host: arista3.twb-tech.com
+    username: pyclass
+    file_system: /mnt/flash
+
+arista4:
+    device_type: arista_eos
+    host: arista4.twb-tech.com
+    username: pyclass
+    file_system: /mnt/flash
