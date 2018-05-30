@@ -26,7 +26,8 @@
 # l. Switch back to the master branch
 # 
 
-Go to github.com/user (i.e. your GitHub page)
+
+>>> 1a. Go to github.com/user (i.e. your GitHub page)
 
 Click on the '+' in the upper right corner.
 
@@ -38,7 +39,7 @@ d. Set license to Apache2 (for open-source projects)
 e. Create repository
 
 
-1b. 
+>>> 1b. 
 
 cd ~
 $ git clone https://github.com/ktbyers/python_course_test1
@@ -53,9 +54,11 @@ $ ls
 LICENSE  README.md
 
 
-1c. 
+>>> 1c. 
+
 $ vi README.md 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git status
+
+$ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 Changes not staged for commit:
@@ -65,34 +68,40 @@ Changes not staged for commit:
 	modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git add README.md 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git commit -m "Update the README"
+
+$ git add README.md 
+$ git commit -m "Update the README"
 [master 93af030] Update the README
- 1 file changed, 3 insertions(+), 1 deletion(-)
+1 file changed, 3 insertions(+), 1 deletion(-)
 
 
-1d. 
-vi test1.py
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ python test1.py 
+>>> 1d. 
+
+$ vi test1.py
+$ python test1.py 
 Hello Python3
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git add test1.py 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git commit -m "Add Python script"
+
+$ git add test1.py 
+$ git commit -m "Add Python script"
 [master 4f88ede] Add Python script
  1 file changed, 1 insertion(+)
  create mode 100644 test1.py
 
 
-1e.
-git status
+>>> 1e.
+$ git status
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
 nothing to commit, working tree clean
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git rm test1.py 
+
+$ git rm test1.py 
 rm 'test1.py'
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ ls
+
+$ ls
 LICENSE  README.md
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git status
+
+$ git status
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
@@ -101,30 +110,27 @@ Changes to be committed:
 
 	deleted:    test1.py
 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git commit -m "Delete test1.py"
+$ git commit -m "Delete test1.py"
 [master 36e015f] Delete test1.py
  1 file changed, 1 deletion(-)
  delete mode 100644 test1.py
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git status
+
+
+>>> 1f.
+
+$ git status
 On branch master
 Your branch is ahead of 'origin/master' by 3 commits.
   (use "git push" to publish your local commits)
 nothing to commit, working tree clean
 
-
-1f.
-
-git status
-On branch master
-Your branch is ahead of 'origin/master' by 3 commits.
-  (use "git push" to publish your local commits)
-nothing to commit, working tree clean
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git remote -v
+$ git remote -v
 origin	https://github.com/ktbyers/python_course_test1 (fetch)
 origin	https://github.com/ktbyers/python_course_test1 (push)
-(py3_venv) [kbyers@ip-172-30-0-171 python_course_test1]$ git push origin master
-Username for 'https://github.com': ktbyers
-Password for 'https://ktbyers@github.com': 
+
+$ git push origin master
+Username for 'https://github.com': <your_user>
+Password for 'https://your_user@github.com': 
 Counting objects: 7, done.
 Compressing objects: 100% (5/5), done.
 Writing objects: 100% (7/7), 699 bytes | 699.00 KiB/s, done.
@@ -133,15 +139,15 @@ remote: Resolving deltas: 100% (2/2), done.
 To https://github.com/ktbyers/python_course_test1
    5e6c702..36e015f  master -> master
 
-Now four commits on branch on GitHub
+There are now four commits on the master branch on GitHub
 
 
-1g. Click the fork button on the ktbyers/python_course repository
+>>> 1g. Click the fork button on the ktbyers/python_course repository
 
 
-1h. git clone https://github.com/your_github_user/python_coursea
+>>> 1h. 
 
-git clone https://github.com/ktbyers/python_course
+$ git clone https://github.com/<your_user>/python_course
 Cloning into 'python_course'...
 remote: Counting objects: 487, done.
 remote: Compressing objects: 100% (315/315), done.
@@ -150,21 +156,22 @@ Receiving objects: 100% (487/487), 96.42 KiB | 4.02 MiB/s, done.
 Resolving deltas: 100% (211/211), done.
 
 
-1i. 
+>>> 1i. 
 
-git checkout -b bonus origin
+# Create the new branch and checkout in one action
+$ git checkout -b bonus origin
 Branch bonus set up to track remote branch master from origin.
 Switched to a new branch 'bonus'
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git branch
+
+$ git branch
 * bonus
   master
 
-Create and checkout in one go
 
-
-1j.
+>>> 1j.
 $ vi README.md 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git status
+
+$ git status
 On branch bonus
 Your branch is up-to-date with 'origin/master'.
 Changes not staged for commit:
@@ -174,18 +181,23 @@ Changes not staged for commit:
 	modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git add README.md 
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git commit -m "Test change to the bonus branch"
+
+$ git add README.md 
+$ git commit -m "Test change to the bonus branch"
 [bonus 98b6cbf] Test change to the bonus branch
  1 file changed, 2 insertions(+)
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git status
+
+
+>>> 1k.
+$ git status
 On branch bonus
 Your branch is ahead of 'origin/master' by 1 commit.
   (use "git push" to publish your local commits)
 nothing to commit, working tree clean
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git push origin bonus
-Username for 'https://github.com': ktbyers
-Password for 'https://ktbyers@github.com': 
+
+$ git push origin bonus
+Username for 'https://github.com': <your_user>
+Password for 'https://your_user@github.com': 
 Counting objects: 3, done.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 340 bytes | 340.00 KiB/s, done.
@@ -198,19 +210,23 @@ This branch now exists on GitHub
 https://github.com/ktbyers/python_course/tree/bonus
 
 
-1l.
+>>> 1l.
 
 $ git branch
 * bonus
   master
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git checkout master
+
+$ git checkout master
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git status
+
+$ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 nothing to commit, working tree clean
-(py3_venv) [kbyers@ip-172-30-0-171 python_course]$ git branch
+
+$ git branch
   bonus
 * master
+
 
