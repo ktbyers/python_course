@@ -1,0 +1,8 @@
+Execute exercises using "python exercise name" (ex. python napalm_ex1.py)
+
+For napalm_ex6.py, directory had to be changed from ktbyers to schau
+         # NAPALM load_template requires an absolute path
+-        base_dir = '/home/kbyers/python_course/class7/CFGS/'
++        base_dir = '/home/schau/python_course/class7/CFGS/'
+
+For napalm_ex6_alt.py, NX-OS ping failing is expected (in the email notes already)
