@@ -1,0 +1,10 @@
+
+# Initial Setup (just once to setup the DB)
+cd ~/DJANGOX/djproject
+python manage.py makemigrations net_system
+python manage.py migrate
+
+cd ~/DJANGOX/djproject/net_system
+python load_devices.py 
+python load_credentials.py 
+
