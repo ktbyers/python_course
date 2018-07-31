@@ -102,3 +102,5 @@ ENV/
 
 class3/netdev.*
 class3/*.svg
+
+*.swp
