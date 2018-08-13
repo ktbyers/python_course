@@ -9,16 +9,16 @@ Use XPath parsing to find all of the arp entries and to construct the following
 dictionary:
 
 {
-  '10.220.88.1':
-     {
+  '10.220.88.1':
+    {
         'intf': 'vlan.0',
         'mac_addr': '00:62:ec:29:70:fe'
-     },
+    },
   '10.220.88.20':
-     {
+    {
         'intf': 'vlan.0',
-        'mac_addr': 'c8:9c:1d:ea:0e:b6'
-     }
+        'mac_addr': 'c8:9c:1d:ea:0e:b6'
+    }
 }
 
 Print this dictionary out to standard output.
