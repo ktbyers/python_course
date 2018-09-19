@@ -1,0 +1,8 @@
+  ansible-playbook exercise2a.yml 
+  ansible-playbook exercise2b.yml 
+  ansible-playbook exercise3.yml 
+  ansible-playbook exercise4a.yml -i ./ansible-hosts-4a
+  ansible-playbook exercise4b.yml 
+  ansible-playbook exercise5.yml 
+  
+  Note, exercise 4a should fail (i.e. we are testing that it fails in this case).
